@@ -263,16 +263,15 @@
             document.getElementById('bottom-home-from-order-2').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
             document.getElementById('home-from-thanks').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
 
-            // PRODUCTS with REAL product images from reliable sources
+            // PRODUCTS with BNB using local /bnb.jpeg and others from Unsplash
             const productContainer = document.getElementById('product-list');
             
-            // Using high-quality beauty product images from Unsplash (free to use)
             const beautyProducts = [
                 { 
                     title: "BNB Complete Glow Kit", 
                     description: "Whitening cream, face wash, serum & mask – ultimate beauty set", 
                     price: 1999, 
-                    thumbnail: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop", 
+                    thumbnail: "/bnb.jpeg",  // Local image for BNB
                     rating: 4.9 
                 },
                 { 
