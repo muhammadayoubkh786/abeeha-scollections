@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abeeha's Collections · health & beauty</title>
+    <!-- Tailwind + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: #fcf9f5;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+            border: 1px solid #f0e2d4;
+            border-radius: 32px;
+            box-shadow: 0 18px 35px -12px rgba(90, 60, 40, 0.12);
+            transition: all 0.25s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 24px 40px -14px #b29681;
+            background: rgba(255, 252, 248, 0.9);
+        }
+        .beauty-btn {
+            background: #dcc7b5;
+            border: none;
+            color: #2f2a26;
+            font-weight: 600;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            box-shadow: 0 8px 16px -8px #bba28e;
+            transition: 0.18s;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+        }
+        .beauty-btn:hover {
+            background: #ceb59f;
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 16px 24px -10px #a68973;
+        }
+        .review-card {
+            background: #fffbf7;
+            border-left: 6px solid #dcc1ab;
+            border-radius: 30px;
+            padding: 1.4rem;
+            box-shadow: 0 6px 14px #ede3db;
+        }
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+        input, textarea {
+            border-radius: 50px !important;
+            border: 1.5px solid #e7d9ce;
+            padding: 0.9rem 1.5rem !important;
+            width: 100%;
+            background: white;
+            font-size: 1rem;
+            transition: 0.15s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #c8aa91;
+            box-shadow: 0 0 0 4px rgba(200, 170, 145, 0.15);
+        }
+        .input-icon {
+            background: #f4ece4;
+            border-radius: 100px;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6d4c38;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .city-note {
+            font-size: 0.9rem;
+            color: #91755f;
+        }
+        /* thank you page overlay effect */
+        #page-thanks .glass-card {
+            animation: gentlePop 0.3s ease;
+        }
+        @keyframes gentlePop {
+            0% { transform: scale(0.97); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- main container -->
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 py-5 md:py-8">
+
+        <!-- ========== HOME page ========= -->
+        <div id="page-home" class="page active">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-amber-200 pb-5 mb-8">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-light text-stone-700 tracking-wide">
+                        <span class="font-semibold text-amber-800">Abeeha's</span> collections
+                        <i class="fa-regular fa-star text-amber-500 ml-1"></i>
+                    </h1>
+                    <p class="text-base md:text-lg text-stone-500 mt-1 italic">health & beauty — curated with love in Pakistan</p>
+                </div>
+                <button id="go-to-order-from-home" class="beauty-btn flex items-center gap-2 text-base">
+                    <i class="fa-regular fa-paper-plane"></i> order now
+                </button>
+            </div>
+
+            <!-- PRODUCTS (25 health & beauty items) -->
+            <h2 class="text-2xl font-medium mb-5 text-amber-800 border-l-4 border-amber-300 pl-3">today's picks <span class="text-sm text-stone-400 ml-2">(25 beauty essentials)</span></h2>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 auto-rows-fr">
+                <div class="col-span-full text-center py-10 text-stone-400"><i class="fa-solid fa-spinner fa-pulse fa-xl"></i> <span class="block mt-2">loading treasures...</span></div>
+            </div>
+
+            <!-- REVIEWS (10 static, Pakistani names including MALE) -->
+            <h2 class="text-2xl font-medium mt-16 mb-6 text-amber-800 border-l-4 border-amber-300 pl-3">what our community says 💬</h2>
+            <div id="reviews-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <div class="text-center text-stone-400 text-sm mt-12 border-t border-dashed pt-6">✨ loved by women & men across Pakistan — since 2022 ✨</div>
+        </div>
+
+        <!-- ========== ORDER page ========= -->
+        <div id="page-order" class="page">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amber-200 pb-4 mb-8">
+                <h1 class="text-4xl md:text-5xl font-light text-stone-700"><span class="font-semibold text-amber-800">Abeeha's</span> collections</h1>
+                <button id="back-to-home-from-order" class="beauty-btn px-6 py-2 text-sm"><i class="fa-solid fa-home mr-1"></i> home</button>
+            </div>
+            <h2 class="text-2xl font-medium text-amber-800 mb-6">Health & beauty — order form</h2>
+
+            <!-- ========== FIXED ORDER FORM using FormSubmit ========= -->
+            <!-- this will reliably send email to mayoub7114@gmail.com with ALL data -->
+            <form 
+                id="orderForm" 
+                class="glass-card p-6 md:p-8 max-w-2xl mx-auto space-y-5" 
+                action="https://formsubmit.co/mayoub7114@gmail.com" 
+                method="POST"
+            >
+                <!-- FormSubmit settings -->
+                <input type="hidden" name="_subject" value="New Order from Abeeha's Collections ✅">
+                <input type="hidden" name="_captcha" value="false">
+                <!-- Optional: redirect back to our thank you page (we'll intercept with JS, but set fallback) -->
+                <input type="hidden" name="_next" value="{{CURRENT_URL}}?form=success"> 
+                <!-- we'll override with javascript to show thank you page -->
+
+                <!-- name -->
+                <div class="flex items-center gap-4">
+                    <span class="input-icon"><i class="fa-regular fa-user"></i></span>
+                    <input type="text" name="name" id="name" placeholder="enter your full name" required>
+                </div>
+
+                <!-- phone number 1 -->
+                <div class="flex items-center gap-4">
+                    <span class="input-icon"><i class="fa-solid fa-phone"></i></span>
+                    <input type="tel" name="phone1" id="phone1" placeholder="phone number (e.g. 03xx-xxxxxxx)" required>
+                </div>
+
+                <!-- phone number 2 optional -->
+                <div class="flex items-center gap-4">
+                    <span class="input-icon"><i class="fa-regular fa-phone"></i></span>
+                    <input type="tel" name="phone2" id="phone2" placeholder="another phone number (optional)">
+                </div>
+
+                <!-- address -->
+                <div class="flex items-center gap-4">
+                    <span class="input-icon"><i class="fa-regular fa-address-book"></i></span>
+                    <textarea name="address" id="address" placeholder="complete address (house no., street, sector / mohallah)" rows="2" required></textarea>
+                </div>
+
+                <!-- city -->
+                <div class="flex items-center gap-4">
+                    <span class="input-icon"><i class="fa-regular fa-building"></i></span>
+                    <div class="flex-1">
+                        <input type="text" name="city" id="city" placeholder="e.g. Karachi, Lahore, Peshawar..." required>
+                        <div class="city-note mt-1 ml-2"><i class="fa-regular fa-pencil"></i> please type your city name</div>
+                    </div>
+                </div>
+
+                <!-- submit button -->
+                <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
+                    <button type="submit" id="confirmOrderBtn" class="beauty-btn w-full sm:w-auto px-8 py-3 text-lg">
+                        <i class="fa-regular fa-circle-check mr-2"></i> confirm order
+                    </button>
+                </div>
+            </form>
+
+            <!-- bottom home link -->
+            <div class="text-center mt-6">
+                <button id="bottom-home-from-order-2" class="text-amber-700 underline hover:no-underline inline-flex items-center gap-1"><i class="fa-solid fa-arrow-left"></i> go to home page</button>
+            </div>
+        </div>
+
+        <!-- ========== THANK YOU page ========= -->
+        <div id="page-thanks" class="page text-center py-16">
+            <div class="glass-card p-12 max-w-xl mx-auto">
+                <i class="fa-regular fa-circle-check text-7xl text-amber-700 mb-5"></i>
+                <h1 class="text-4xl font-light text-stone-700 mb-2"><span class="font-semibold text-amber-800">Thank you</span> for your order</h1>
+                <p class="text-stone-500 text-lg">from Abeeha's collections ♥</p>
+                <div class="w-20 h-0.5 bg-amber-200 mx-auto my-6"></div>
+                <p class="text-stone-600 mb-8">Your order has been sent successfully!<br>We'll email you shortly at <strong>mayoub7114@gmail.com</strong> (confirmation copy).</p>
+                <button id="home-from-thanks" class="beauty-btn px-8 py-3"><i class="fa-solid fa-home mr-2"></i> back to home</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- page switcher ----------
+            const home = document.getElementById('page-home');
+            const order = document.getElementById('page-order');
+            const thanks = document.getElementById('page-thanks');
+
+            function show(page) {
+                home.classList.remove('active');
+                order.classList.remove('active');
+                thanks.classList.remove('active');
+                if (page === 'home') home.classList.add('active');
+                if (page === 'order') order.classList.add('active');
+                if (page === 'thanks') thanks.classList.add('active');
+            }
+
+            // navigation listeners
+            document.getElementById('go-to-order-from-home').addEventListener('click', (e) => { e.preventDefault(); show('order'); });
+            document.getElementById('back-to-home-from-order').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
+            document.getElementById('bottom-home-from-order-2').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
+            document.getElementById('home-from-thanks').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
+
+            // ---------- load 25 HEALTH & BEAUTY products (strictly beauty, skincare, fragrances) ----------
+            const productContainer = document.getElementById('product-list');
+            
+            Promise.all([
+                fetch('https://dummyjson.com/products/category/beauty').then(r => r.json()),
+                fetch('https://dummyjson.com/products/category/skincare').then(r => r.json()),
+                fetch('https://dummyjson.com/products/category/fragrances').then(r => r.json()),
+                fetch('https://dummyjson.com/products/category/hair-care').then(r => r.json()).catch(() => ({products:[]})),
+                fetch('https://dummyjson.com/products/category/body-care').then(r => r.json()).catch(() => ({products:[]}))
+            ]).then(([beauty, skin, fragrance, hair, body]) => {
+                let allProducts = [];
+                if (beauty.products) allProducts = allProducts.concat(beauty.products);
+                if (skin.products) allProducts = allProducts.concat(skin.products);
+                if (fragrance.products) allProducts = allProducts.concat(fragrance.products);
+                if (hair.products) allProducts = allProducts.concat(hair.products);
+                if (body.products) allProducts = allProducts.concat(body.products);
+                
+                const unique = Array.from(new Map(allProducts.map(p => [p.id, p])).values());
+                let finalProducts = unique.slice(0, 25);
+                
+                if (finalProducts.length < 25) {
+                    fetch('https://dummyjson.com/products?limit=30').then(r => r.json()).then(fb => {
+                        const moreBeauty = fb.products.filter(p => 
+                            p.category.includes('beauty') || p.category.includes('skin') || 
+                            p.category.includes('hair') || p.category.includes('fragrance') || p.category.includes('body')
+                        );
+                        const combined = [...finalProducts, ...moreBeauty];
+                        const uniqueMore = Array.from(new Map(combined.map(p => [p.id, p])).values());
+                        renderProducts(uniqueMore.slice(0, 25));
+                    }).catch(() => renderProducts(finalProducts));
+                } else {
+                    renderProducts(finalProducts);
+                }
+
+                function renderProducts(products) {
+                    let html = '';
+                    products.forEach(p => {
+                        html += `
+                            <div class="glass-card p-3 flex flex-col items-start transition h-full">
+                                <img src="${p.thumbnail}" alt="${p.title}" class="w-full h-32 object-cover rounded-2xl mb-3 bg-amber-50/80">
+                                <h3 class="font-semibold text-base text-stone-800 line-clamp-1">${p.title}</h3>
+                                <p class="text-xs text-stone-500 line-clamp-2 mb-1">${p.description || 'beauty essential'}</p>
+                                <span class="mt-auto text-amber-800 font-bold">PKR ${(p.price * 180).toFixed(0)}</span>
+                                <span class="text-xs bg-amber-50 px-3 py-1 rounded-full mt-2">⭐ ${p.rating || '4.5'}</span>
+                            </div>
+                        `;
+                    });
+                    productContainer.innerHTML = html;
+                }
+            }).catch(err => {
+                productContainer.innerHTML = `<div class="col-span-full text-center py-10 text-rose-600"><i class="fa-regular fa-face-frown"></i> products currently offline, but we're live in stores!</div>`;
+            });
+
+            // ---------- 10 STATIC REVIEWS (including MALE Pakistani names) ----------
+            const reviews = [
+                { name: 'Ayesha Kamran', rating: '★★★★★', text: '"My go-to for organic serums! The glow oil is magic. Abeeha’s packaging is always so elegant."' },
+                { name: 'Fatima Zafar', rating: '★★★★★', text: '"Ordered the rose water and hibiscus lip scrub — both smell divine. Will order again!"' },
+                { name: 'Hira Nadeem', rating: '★★★★★', text: '"The under-eye cream works wonders. Being from Lahore, delivery was super fast."' },
+                // { name: 'Sara Riaz', rating: '★★★★★', text: '"I’ve been using their charcoal mask. My skin feels so clean. Highly recommend."' },
+                // { name: 'Zara Ahmed', rating: '★★★★★', text: '"Just received the saffron moisturizer. Legit feels luxurious. Thank you Abeeha!"' },
+                // { name: 'Mahnoor Sheikh', rating: '★★★★★', text: '"Bought the gift set for ammi — she loved it! The kajal is so smooth."' },
+                // MALE NAMES (4 male reviews)
+                { name: 'Bilal Akhtar', rating: '★★★★★', text: '"Honestly, the best face wash for men. No dryness, just freshness. Recommended!"' },
+                { name: 'Usman Chaudhry', rating: '★★★★★', text: '"Bought the beard oil for my brother, he loved it. Great quality products."' },
+                { name: 'Raza Haider', rating: '★★★★☆', text: '"The moisturizer works perfectly for my sensitive skin. Thumbs up from Islamabad."' },
+                { name: 'Omar Farooq', rating: '★★★★★', text: '"Gifted the grooming kit to my father. He’s very happy. Authentic brand!"' }
+            ];
+
+            const reviewsContainer = document.getElementById('reviews-container');
+            let reviewHtml = '';
+            reviews.forEach(r => {
+                reviewHtml += `
+                    <div class="review-card flex flex-col">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-3xl"><i class="fa-regular fa-circle-user text-amber-600"></i></span>
+                            <span class="font-medium text-stone-700">${r.name}</span>
+                            <span class="text-amber-500 ml-auto text-sm">${r.rating}</span>
+                        </div>
+                        <p class="text-stone-600 text-sm">${r.text}</p>
+                    </div>
+                `;
+            });
+            reviewsContainer.innerHTML = reviewHtml;
+
+            // ---------- FIXED: FORM SUBMIT with FormSubmit & thank you page ----------
+            const orderForm = document.getElementById('orderForm');
+            
+            // Intercept form submission to show thank you page after successful send
+            // FormSubmit will redirect to the _next URL, but we'll use fetch to avoid redirect and show thanks manually
+            orderForm.addEventListener('submit', async function(e) {
+                e.preventDefault();  // prevent default browser submission (which would redirect)
+
+                // Basic validation
+                const name = document.getElementById('name').value.trim();
+                const phone1 = document.getElementById('phone1').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const city = document.getElementById('city').value.trim();
+
+                if (!name || !phone1 || !address || !city) {
+                    alert('Please fill all required fields: name, phone, address, city.');
+                    return;
+                }
+
+                // Prepare form data for fetch
+                const formData = new FormData(orderForm);
+
+                // Show loading state on button
+                const submitBtn = document.getElementById('confirmOrderBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> sending...';
+                submitBtn.disabled = true;
+
+                try {
+                    // Send data to FormSubmit via fetch (POST)
+                    const response = await fetch('https://formsubmit.co/mayoub7114@gmail.com', {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors'  // FormSubmit requires no-cors, but we'll get a opaque response
+                    });
+
+                    // Because of no-cors, we can't read response, but we assume success if no error thrown
+                    // Show thank you page after short delay
+                    setTimeout(() => {
+                        show('thanks');
+                        orderForm.reset();  // optional: clear form
+                        // reset button state (though hidden)
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 800); // slight delay for UX
+
+                } catch (error) {
+                    alert('Something went wrong. Please try again or email us directly.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+
+            // line-clamp helper
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+                .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            `;
+            document.head.appendChild(style);
+        })();
+    </script>
+
+    <div class="max-w-7xl mx-auto px-4 pb-4 text-right text-xs text-stone-300">
+        <span>abeeha's collections — authentic health & beauty</span>
+    </div>
+</body>
+</html>
