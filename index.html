@@ -2,57 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Abeeha's Collections · health & beauty</title>
     <!-- Tailwind + Font Awesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background: #fcf9f5;
+            background: linear-gradient(142deg, #fdf6ef 0%, #faefe6 100%);
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(4px);
-            border: 1px solid #f0e2d4;
-            border-radius: 32px;
-            box-shadow: 0 18px 35px -12px rgba(90, 60, 40, 0.12);
-            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(235, 215, 195, 0.5);
+            border-radius: 36px;
+            box-shadow: 0 25px 40px -18px rgba(120, 80, 55, 0.25);
+            transition: all 0.3s ease;
         }
         .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 24px 40px -14px #b29681;
-            background: rgba(255, 252, 248, 0.9);
+            transform: translateY(-7px);
+            box-shadow: 0 30px 50px -18px #b2917a;
+            background: rgba(255, 255, 255, 0.95);
         }
         .beauty-btn {
-            background: #dcc7b5;
+            background: linear-gradient(115deg, #dcc7b5, #caad93);
             border: none;
             color: #2f2a26;
             font-weight: 600;
-            padding: 0.8rem 2.2rem;
+            padding: 0.9rem 2rem;
             border-radius: 60px;
-            box-shadow: 0 8px 16px -8px #bba28e;
-            transition: 0.18s;
+            box-shadow: 0 12px 22px -12px #b2917a;
+            transition: 0.2s;
             letter-spacing: 0.3px;
-            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 180px;
         }
         .beauty-btn:hover {
-            background: #ceb59f;
-            transform: scale(1.02) translateY(-3px);
-            box-shadow: 0 16px 24px -10px #a68973;
+            background: linear-gradient(115deg, #ceb59f, #bb9b81);
+            transform: scale(1.02) translateY(-4px);
+            box-shadow: 0 20px 28px -10px #9e806b;
+        }
+        .outline-btn {
+            background: transparent;
+            border: 2px solid #dcc1ab;
+            color: #5a4435;
+            font-weight: 500;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .outline-btn:hover {
+            background: #dcc1ab30;
+            border-color: #b58f72;
+            transform: scale(1.02);
         }
         .review-card {
-            background: #fffbf7;
+            background: #fffaf5;
             border-left: 6px solid #dcc1ab;
             border-radius: 30px;
             padding: 1.4rem;
-            box-shadow: 0 6px 14px #ede3db;
+            box-shadow: 0 10px 20px #e8d5c6;
+            transition: 0.2s;
+        }
+        .review-card:hover {
+            background: #ffffff;
+            box-shadow: 0 16px 28px #dcc1ab80;
         }
         .page {
             display: none;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.25s;
         }
         .page.active {
             display: block;
@@ -60,143 +95,142 @@
         }
         input, textarea {
             border-radius: 50px !important;
-            border: 1.5px solid #e7d9ce;
-            padding: 0.9rem 1.5rem !important;
+            border: 1.8px solid #e7d2c2;
+            padding: 1rem 1.8rem !important;
             width: 100%;
             background: white;
             font-size: 1rem;
-            transition: 0.15s;
+            transition: 0.2s;
         }
         input:focus, textarea:focus {
             outline: none;
-            border-color: #c8aa91;
-            box-shadow: 0 0 0 4px rgba(200, 170, 145, 0.15);
+            border-color: #c09d81;
+            box-shadow: 0 0 0 5px rgba(192, 157, 129, 0.2);
         }
         .input-icon {
-            background: #f4ece4;
+            background: #f4e4d9;
             border-radius: 100px;
-            width: 54px;
-            height: 54px;
+            width: 58px;
+            height: 58px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6d4c38;
-            font-size: 1.4rem;
+            color: #7a5c48;
+            font-size: 1.5rem;
             flex-shrink: 0;
+            box-shadow: 0 6px 10px #decbbd;
         }
         .city-note {
             font-size: 0.9rem;
-            color: #91755f;
+            color: #9b7b64;
         }
-        @keyframes gentlePop {
-            0% { transform: scale(0.97); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        @media (max-width: 640px) {
+            .beauty-btn { 
+                width: 100%; 
+                max-width: 300px; 
+            }
+            .outline-btn { 
+                width: 100%; 
+                max-width: 260px; 
+            }
+            .glass-card { border-radius: 28px; }
+        }
+        .product-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 24px;
+            background: #edd9cb;
         }
     </style>
 </head>
 <body class="antialiased text-gray-800">
 
-    <!-- main container -->
-    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 py-5 md:py-8">
+    <div id="app" class="max-w-7xl mx-auto px-3 sm:px-5 py-4 md:py-8">
 
-        <!-- ========== HOME page ========= -->
+        <!-- HOME page -->
         <div id="page-home" class="page">
-            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-amber-200 pb-5 mb-8">
-                <div>
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-amber-200/60 pb-5 mb-6">
+                <div class="text-center sm:text-left">
                     <h1 class="text-4xl md:text-5xl font-light text-stone-700 tracking-wide">
                         <span class="font-semibold text-amber-800">Abeeha's</span> collections
-                        <i class="fa-regular fa-star text-amber-500 ml-1"></i>
+                        <i class="fa-regular fa-star text-amber-400 ml-1"></i>
                     </h1>
-                    <p class="text-base md:text-lg text-stone-500 mt-1 italic">health & beauty — curated with love in Pakistan</p>
+                    <p class="text-base text-stone-500 mt-1 italic">health & beauty — curated with love in Pakistan</p>
                 </div>
-                <button id="go-to-order-from-home" class="beauty-btn flex items-center gap-2 text-base">
+                <button id="go-to-order-from-home" class="beauty-btn !mx-auto sm:!mx-0 text-base">
                     <i class="fa-regular fa-paper-plane"></i> order now
                 </button>
             </div>
 
-            <!-- PRODUCTS (25 health & beauty items) -->
-            <h2 class="text-2xl font-medium mb-5 text-amber-800 border-l-4 border-amber-300 pl-3">today's picks <span class="text-sm text-stone-400 ml-2">(25 beauty essentials)</span></h2>
-            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 auto-rows-fr">
-                <div class="col-span-full text-center py-10 text-stone-400"><i class="fa-solid fa-spinner fa-pulse fa-xl"></i> <span class="block mt-2">loading treasures...</span></div>
+            <h2 class="text-2xl font-medium mb-5 text-amber-800 border-l-4 border-amber-400 pl-3">✨ today's picks <span class="text-sm text-stone-400 ml-2">(25 beauty gems)</span></h2>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 auto-rows-fr">
+                <!-- Products will be inserted here -->
             </div>
 
-            <!-- REVIEWS (10 static, Pakistani names including MALE) -->
-            <h2 class="text-2xl font-medium mt-16 mb-6 text-amber-800 border-l-4 border-amber-300 pl-3">what our community says 💬</h2>
-            <div id="reviews-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <h2 class="text-2xl font-medium mt-16 mb-6 text-amber-800 border-l-4 border-amber-400 pl-3">💬 community whispers</h2>
+            <div id="reviews-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
-            <div class="text-center text-stone-400 text-sm mt-12 border-t border-dashed pt-6">✨ loved by women & men across Pakistan — since 2022 ✨</div>
+            <div class="text-center text-stone-400 text-sm mt-12 border-t border-amber-200/40 pt-6">✨ loved by women & men across Pakistan — since 2022 ✨</div>
         </div>
 
-        <!-- ========== ORDER page (ACTIVE BY DEFAULT) ========= -->
+        <!-- ORDER page -->
         <div id="page-order" class="page active">
-            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amber-200 pb-4 mb-8">
-                <h1 class="text-4xl md:text-5xl font-light text-stone-700"><span class="font-semibold text-amber-800">Abeeha's</span> collections</h1>
-                <button id="back-to-home-from-order" class="beauty-btn px-6 py-2 text-sm"><i class="fa-solid fa-home mr-1"></i> home</button>
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amber-200/60 pb-4 mb-7">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-light text-stone-700"><span class="font-semibold text-amber-800">Abeeha's</span> collections</h1>
+                <button id="back-to-home-from-order" class="outline-btn text-sm"><i class="fa-solid fa-home mr-1"></i> home</button>
             </div>
-            <h2 class="text-2xl font-medium text-amber-800 mb-6">Health & beauty — order form</h2>
+            <h2 class="text-2xl font-medium text-amber-800 mb-7 text-center sm:text-left">health & beauty — order form</h2>
 
-            <!-- ORDER FORM using FormSubmit -->
             <form 
                 id="orderForm" 
-                class="glass-card p-6 md:p-8 max-w-2xl mx-auto space-y-5" 
+                class="glass-card p-5 sm:p-8 max-w-2xl mx-auto space-y-5" 
                 action="https://formsubmit.co/t2online.skills@gmail.com" 
                 method="POST"
             >
-                <!-- FormSubmit settings -->
                 <input type="hidden" name="_subject" value="New Order from Abeeha's Collections ✅">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_next" value="{{CURRENT_URL}}?form=success">
 
-                <!-- name -->
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col sm:flex-row items-center gap-3">
                     <span class="input-icon"><i class="fa-regular fa-user"></i></span>
                     <input type="text" name="name" id="name" placeholder="enter your full name" required>
                 </div>
-
-                <!-- phone number 1 -->
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col sm:flex-row items-center gap-3">
                     <span class="input-icon"><i class="fa-solid fa-phone"></i></span>
                     <input type="tel" name="phone1" id="phone1" placeholder="phone number (e.g. 03xx-xxxxxxx)" required>
                 </div>
-
-                <!-- phone number 2 optional -->
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col sm:flex-row items-center gap-3">
                     <span class="input-icon"><i class="fa-regular fa-phone"></i></span>
                     <input type="tel" name="phone2" id="phone2" placeholder="another phone number (optional)">
                 </div>
-
-                <!-- address -->
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col sm:flex-row items-center gap-3">
                     <span class="input-icon"><i class="fa-regular fa-address-book"></i></span>
                     <textarea name="address" id="address" placeholder="complete address (house no., street, sector / mohallah)" rows="2" required></textarea>
                 </div>
-
-                <!-- city -->
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col sm:flex-row items-center gap-3">
                     <span class="input-icon"><i class="fa-regular fa-building"></i></span>
-                    <div class="flex-1">
+                    <div class="flex-1 w-full">
                         <input type="text" name="city" id="city" placeholder="e.g. Karachi, Lahore, Peshawar..." required>
-                        <div class="city-note mt-1 ml-2"><i class="fa-regular fa-pencil"></i> please type your city name</div>
+                        <div class="city-note mt-1 text-center sm:text-left"><i class="fa-regular fa-pencil"></i> please type your city</div>
                     </div>
                 </div>
 
-                <!-- submit button -->
-                <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="pt-4 flex justify-center">
                     <button type="submit" id="confirmOrderBtn" class="beauty-btn w-full sm:w-auto px-8 py-3 text-lg">
                         <i class="fa-regular fa-circle-check mr-2"></i> confirm order
                     </button>
                 </div>
             </form>
 
-            <!-- bottom home link -->
-            <div class="text-center mt-6">
-                <button id="bottom-home-from-order-2" class="text-amber-700 underline hover:no-underline inline-flex items-center gap-1"><i class="fa-solid fa-arrow-left"></i> go to home page</button>
+            <div class="flex justify-center mt-6">
+                <button id="bottom-home-from-order-2" class="outline-btn"><i class="fa-solid fa-arrow-left"></i> go to home page</button>
             </div>
         </div>
 
-        <!-- ========== THANK YOU page ========= -->
-        <div id="page-thanks" class="page text-center py-16">
-            <div class="glass-card p-12 max-w-xl mx-auto">
+        <!-- THANK YOU page -->
+        <div id="page-thanks" class="page text-center py-10">
+            <div class="glass-card p-8 md:p-12 max-w-xl mx-auto">
                 <i class="fa-regular fa-circle-check text-7xl text-amber-700 mb-5"></i>
                 <h1 class="text-4xl font-light text-stone-700 mb-2"><span class="font-semibold text-amber-800">Thank you</span> for your order</h1>
                 <p class="text-stone-500 text-lg">from Abeeha's collections ♥</p>
@@ -209,7 +243,7 @@
 
     <script>
         (function() {
-            // ---------- page switcher ----------
+            // Page switcher
             const home = document.getElementById('page-home');
             const order = document.getElementById('page-order');
             const thanks = document.getElementById('page-thanks');
@@ -223,78 +257,221 @@
                 if (page === 'thanks') thanks.classList.add('active');
             }
 
-            // navigation listeners
+            // Navigation
             document.getElementById('go-to-order-from-home').addEventListener('click', (e) => { e.preventDefault(); show('order'); });
             document.getElementById('back-to-home-from-order').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
             document.getElementById('bottom-home-from-order-2').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
             document.getElementById('home-from-thanks').addEventListener('click', (e) => { e.preventDefault(); show('home'); });
 
-            // ---------- load 25 HEALTH & BEAUTY products (strictly beauty, skincare, fragrances) ----------
+            // PRODUCTS with REAL product images from reliable sources
             const productContainer = document.getElementById('product-list');
             
-            Promise.all([
-                fetch('https://dummyjson.com/products/category/beauty').then(r => r.json()),
-                fetch('https://dummyjson.com/products/category/skincare').then(r => r.json()),
-                fetch('https://dummyjson.com/products/category/fragrances').then(r => r.json()),
-                fetch('https://dummyjson.com/products/category/hair-care').then(r => r.json()).catch(() => ({products:[]})),
-                fetch('https://dummyjson.com/products/category/body-care').then(r => r.json()).catch(() => ({products:[]}))
-            ]).then(([beauty, skin, fragrance, hair, body]) => {
-                let allProducts = [];
-                if (beauty.products) allProducts = allProducts.concat(beauty.products);
-                if (skin.products) allProducts = allProducts.concat(skin.products);
-                if (fragrance.products) allProducts = allProducts.concat(fragrance.products);
-                if (hair.products) allProducts = allProducts.concat(hair.products);
-                if (body.products) allProducts = allProducts.concat(body.products);
-                
-                const unique = Array.from(new Map(allProducts.map(p => [p.id, p])).values());
-                let finalProducts = unique.slice(0, 25);
-                
-                if (finalProducts.length < 25) {
-                    fetch('https://dummyjson.com/products?limit=30').then(r => r.json()).then(fb => {
-                        const moreBeauty = fb.products.filter(p => 
-                            p.category.includes('beauty') || p.category.includes('skin') || 
-                            p.category.includes('hair') || p.category.includes('fragrance') || p.category.includes('body')
-                        );
-                        const combined = [...finalProducts, ...moreBeauty];
-                        const uniqueMore = Array.from(new Map(combined.map(p => [p.id, p])).values());
-                        renderProducts(uniqueMore.slice(0, 25));
-                    }).catch(() => renderProducts(finalProducts));
-                } else {
-                    renderProducts(finalProducts);
+            // Using high-quality beauty product images from Unsplash (free to use)
+            const beautyProducts = [
+                { 
+                    title: "BNB Complete Glow Kit", 
+                    description: "Whitening cream, face wash, serum & mask – ultimate beauty set", 
+                    price: 1999, 
+                    thumbnail: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop", 
+                    rating: 4.9 
+                },
+                { 
+                    title: "Vitamin C Brightening Serum", 
+                    description: "20% vitamin C for radiant skin", 
+                    price: 899, 
+                    thumbnail: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=300&fit=crop", 
+                    rating: 4.8 
+                },
+                { 
+                    title: "Rosehip & Hibiscus Lip Scrub", 
+                    description: "Sugar-free natural lip scrub", 
+                    price: 549, 
+                    thumbnail: "https://images.unsplash.com/photo-1596755389378-c31d498fd1b6?w=400&h=300&fit=crop", 
+                    rating: 4.7 
+                },
+                { 
+                    title: "Under-eye Cream (Gold Collagen)", 
+                    description: "Reduces puffiness & dark circles", 
+                    price: 1299, 
+                    thumbnail: "https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=400&h=300&fit=crop", 
+                    rating: 4.6 
+                },
+                { 
+                    title: "Charcoal & Clay Mask", 
+                    description: "Deep pore detox for oily skin", 
+                    price: 699, 
+                    thumbnail: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=400&h=300&fit=crop", 
+                    rating: 4.5 
+                },
+                { 
+                    title: "Saffron Moisturizer (50g)", 
+                    description: "Luxurious day cream with saffron", 
+                    price: 1599, 
+                    thumbnail: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop", 
+                    rating: 4.9 
+                },
+                { 
+                    title: "Beard Oil - Sandalwood", 
+                    description: "For soft & shiny beard, 30ml", 
+                    price: 749, 
+                    thumbnail: "https://images.unsplash.com/photo-1627877433051-41e4c5150d6e?w=400&h=300&fit=crop", 
+                    rating: 4.8 
+                },
+                { 
+                    title: "Kajal (Black)", 
+                    description: "Long-lasting, smudge-proof kohl", 
+                    price: 399, 
+                    thumbnail: "https://images.unsplash.com/photo-1631730349985-36b1d2b051f1?w=400&h=300&fit=crop", 
+                    rating: 4.9 
+                },
+                { 
+                    title: "Rose Water Mist (100ml)", 
+                    description: "Hydrating & refreshing toner", 
+                    price: 449, 
+                    thumbnail: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=300&fit=crop", 
+                    rating: 4.7 
+                },
+                { 
+                    title: "Hair Growth Oil (Amla+Bhringraj)", 
+                    description: "Ayurvedic hair oil", 
+                    price: 849, 
+                    thumbnail: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=300&fit=crop", 
+                    rating: 4.6 
+                },
+                { 
+                    title: "Aloe Vera Gel (Pure)", 
+                    description: "Soothing & cooling, 200ml", 
+                    price: 595, 
+                    thumbnail: "https://images.unsplash.com/photo-1620916297397-4da0cb8ea3ed?w=400&h=300&fit=crop", 
+                    rating: 4.8 
+                },
+                { 
+                    title: "BNB Mini Kit (Trial)", 
+                    description: "Face wash, day cream, night cream", 
+                    price: 1199, 
+                    thumbnail: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=400&h=300&fit=crop", 
+                    rating: 4.8 
+                },
+                { 
+                    title: "Nail Polish Remover (Acetone-free)", 
+                    description: "Gentle on nails", 
+                    price: 299, 
+                    thumbnail: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&h=300&fit=crop", 
+                    rating: 4.5 
+                },
+                { 
+                    title: "Foot Cream (Pumice)", 
+                    description: "Cracked heel repair", 
+                    price: 499, 
+                    thumbnail: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&h=300&fit=crop", 
+                    rating: 4.4 
+                },
+                { 
+                    title: "Herbal Face Wash (Neem)", 
+                    description: "For acne-prone skin", 
+                    price: 449, 
+                    thumbnail: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop", 
+                    rating: 4.6 
+                },
+                { 
+                    title: "Coffee Body Scrub", 
+                    description: "Exfoliating & firming", 
+                    price: 649, 
+                    thumbnail: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=300&fit=crop", 
+                    rating: 4.7 
+                },
+                { 
+                    title: "Lip Balm Trio (Berry, Mint, Honey)", 
+                    description: "Set of 3 moisturizing balms", 
+                    price: 799, 
+                    thumbnail: "https://images.unsplash.com/photo-1596755389378-c31d498fd1b6?w=400&h=300&fit=crop", 
+                    rating: 4.8 
+                },
+                { 
+                    title: "Perfume Oil (Jasmine)", 
+                    description: "Attar-style, long lasting", 
+                    price: 549, 
+                    thumbnail: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=300&fit=crop", 
+                    rating: 4.9 
+                },
+                { 
+                    title: "BNB Night Repair Cream", 
+                    description: "With retinol & peptides", 
+                    price: 1399, 
+                    thumbnail: "https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=400&h=300&fit=crop", 
+                    rating: 4.8 
+                },
+                { 
+                    title: "Bath Salt (Lavender)", 
+                    description: "500g relaxing soak", 
+                    price: 649, 
+                    thumbnail: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&h=300&fit=crop", 
+                    rating: 4.6 
+                },
+                { 
+                    title: "Eyelash Curler + Pads", 
+                    description: "Stainless steel, spare pads", 
+                    price: 399, 
+                    thumbnail: "https://images.unsplash.com/photo-1631730349985-36b1d2b051f1?w=400&h=300&fit=crop", 
+                    rating: 4.5 
+                },
+                { 
+                    title: "Makeup Remover Wipes (25pcs)", 
+                    description: "Biodegradable, soft", 
+                    price: 329, 
+                    thumbnail: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&h=300&fit=crop", 
+                    rating: 4.4 
+                },
+                { 
+                    title: "BNB Vitamin C Kit", 
+                    description: "Serum + moisturizer + sunscreen", 
+                    price: 2499, 
+                    thumbnail: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop", 
+                    rating: 4.9 
+                },
+                { 
+                    title: "Hand Cream (Shea Butter)", 
+                    description: "Non-greasy, 75ml", 
+                    price: 449, 
+                    thumbnail: "https://images.unsplash.com/photo-1620916297397-4da0cb8ea3ed?w=400&h=300&fit=crop", 
+                    rating: 4.7 
+                },
+                { 
+                    title: "Face Roller (Jade)", 
+                    description: "Sculpting & de-puffing", 
+                    price: 899, 
+                    thumbnail: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&h=300&fit=crop", 
+                    rating: 4.8 
                 }
+            ];
 
-                function renderProducts(products) {
-                    let html = '';
-                    products.forEach(p => {
-                        html += `
-                            <div class="glass-card p-3 flex flex-col items-start transition h-full">
-                                <img src="${p.thumbnail}" alt="${p.title}" class="w-full h-32 object-cover rounded-2xl mb-3 bg-amber-50/80">
-                                <h3 class="font-semibold text-base text-stone-800 line-clamp-1">${p.title}</h3>
-                                <p class="text-xs text-stone-500 line-clamp-2 mb-1">${p.description || 'beauty essential'}</p>
-                                <span class="mt-auto text-amber-800 font-bold">PKR ${(p.price * 180).toFixed(0)}</span>
-                                <span class="text-xs bg-amber-50 px-3 py-1 rounded-full mt-2">⭐ ${p.rating || '4.5'}</span>
-                            </div>
-                        `;
-                    });
-                    productContainer.innerHTML = html;
-                }
-            }).catch(err => {
-                productContainer.innerHTML = `<div class="col-span-full text-center py-10 text-rose-600"><i class="fa-regular fa-face-frown"></i> products currently offline, but we're live in stores!</div>`;
+            // Render products
+            let html = '';
+            beautyProducts.forEach(p => {
+                html += `
+                    <div class="glass-card p-3 flex flex-col items-start transition h-full">
+                        <img src="${p.thumbnail}" alt="${p.title}" class="w-full h-36 sm:h-32 object-cover rounded-2xl mb-3 bg-amber-50/80" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=400&h=300&fit=crop'">
+                        <h3 class="font-semibold text-sm sm:text-base text-stone-800 line-clamp-1">${p.title}</h3>
+                        <p class="text-xs text-stone-500 line-clamp-2 mb-1">${p.description}</p>
+                        <span class="mt-auto text-amber-800 font-bold">PKR ${p.price}</span>
+                        <span class="text-xs bg-amber-50 px-3 py-1 rounded-full mt-2">⭐ ${p.rating}</span>
+                    </div>
+                `;
             });
+            productContainer.innerHTML = html;
 
-            // ---------- 10 STATIC REVIEWS (including MALE Pakistani names) ----------
+            // Reviews
             const reviews = [
-                { name: 'Ayesha Kamran', rating: '★★★★★', text: '"My go-to for organic serums! The glow oil is magic. Abeeha’s packaging is always so elegant."' },
-                { name: 'Fatima Zafar', rating: '★★★★★', text: '"Ordered the rose water and hibiscus lip scrub — both smell divine. Will order again!"' },
-                { name: 'Hira Nadeem', rating: '★★★★★', text: '"The under-eye cream works wonders. Being from Lahore, delivery was super fast."' },
-                { name: 'Sara Riaz', rating: '★★★★★', text: '"I’ve been using their charcoal mask. My skin feels so clean. Highly recommend."' },
-                { name: 'Zara Ahmed', rating: '★★★★★', text: '"Just received the saffron moisturizer. Legit feels luxurious. Thank you Abeeha!"' },
-                { name: 'Mahnoor Sheikh', rating: '★★★★★', text: '"Bought the gift set for ammi — she loved it! The kajal is so smooth."' },
-                // MALE NAMES (4 male reviews)
-                { name: 'Bilal Akhtar', rating: '★★★★★', text: '"Honestly, the best face wash for men. No dryness, just freshness. Recommended!"' },
-                { name: 'Usman Chaudhry', rating: '★★★★★', text: '"Bought the beard oil for my brother, he loved it. Great quality products."' },
-                { name: 'Raza Haider', rating: '★★★★☆', text: '"The moisturizer works perfectly for my sensitive skin. Thumbs up from Islamabad."' },
-                { name: 'Omar Farooq', rating: '★★★★★', text: '"Gifted the grooming kit to my father. He’s very happy. Authentic brand!"' }
+                { name: 'Ayesha Kamran', rating: '★★★★★', text: '"The BNB kit is life changing! My skin glows. Abeeha’s packaging is always so elegant."' },
+                { name: 'Fatima Zafar', rating: '★★★★★', text: '"Rose water and hibiscus lip scrub — both smell divine. Will order again!"' },
+                { name: 'Hira Nadeem', rating: '★★★★★', text: '"Under-eye cream works wonders. From Lahore, delivery super fast."' },
+                { name: 'Sara Riaz', rating: '★★★★★', text: '"Charcoal mask. My skin feels so clean. Highly recommend."' },
+                { name: 'Zara Ahmed', rating: '★★★★★', text: '"Saffron moisturizer. Legit feels luxurious. Thank you Abeeha!"' },
+                { name: 'Mahnoor Sheikh', rating: '★★★★★', text: '"BNB kit for ammi — she loved it! The kajal is so smooth."' },
+                { name: 'Bilal Akhtar', rating: '★★★★★', text: '"Best face wash for men. No dryness, just freshness. Recommended!"' },
+                { name: 'Usman Chaudhry', rating: '★★★★★', text: '"Bought the beard oil for my brother, he loved it. Great quality."' },
+                { name: 'Raza Haider', rating: '★★★★☆', text: '"Moisturizer works perfectly for my sensitive skin. Thumbs up."' },
+                { name: 'Omar Farooq', rating: '★★★★★', text: '"Gifted grooming kit to father. He’s very happy. Authentic brand!"' }
             ];
 
             const reviewsContainer = document.getElementById('reviews-container');
@@ -313,13 +490,11 @@
             });
             reviewsContainer.innerHTML = reviewHtml;
 
-            // ---------- FORM SUBMIT with FormSubmit & thank you page ----------
+            // Form submission
             const orderForm = document.getElementById('orderForm');
-            
             orderForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
-                // Basic validation
                 const name = document.getElementById('name').value.trim();
                 const phone1 = document.getElementById('phone1').value.trim();
                 const address = document.getElementById('address').value.trim();
@@ -342,22 +517,20 @@
                         body: formData,
                         mode: 'no-cors'
                     });
-
                     setTimeout(() => {
                         show('thanks');
                         orderForm.reset();
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                     }, 800);
-
                 } catch (error) {
-                    alert('Something went wrong. Please try again or email us directly.');
+                    alert('Something went wrong. Please try again.');
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 }
             });
 
-            // line-clamp helper
+            // line-clamp utility
             const style = document.createElement('style');
             style.innerHTML = `
                 .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
@@ -367,7 +540,7 @@
         })();
     </script>
 
-    <div class="max-w-7xl mx-auto px-4 pb-4 text-right text-xs text-stone-300">
+    <div class="max-w-7xl mx-auto px-4 pb-3 text-right text-xs text-stone-300">
         <span>abeeha's collections — authentic health & beauty</span>
     </div>
 </body>
